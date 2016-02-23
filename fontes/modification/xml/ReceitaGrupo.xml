@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<modification>
+  <name>Receita Grupo</name>
+  <id>ReceitaGrupo</id>
+  <ecidade-version>2.3.39</ecidade-version>
+  <file path='cai2_correceitas001.php'>
+    <operation>
+      <search><![CDATA[<!-- [Inicio plugin ReceitaGrupo - parte1] -->]]></search>
+      <add position="after">
+        <![CDATA[
+        <script language="JavaScript" type="text/javascript" src="scripts/prototype.js"></script>]]>
+      </add>
+    </operation>
+    <operation>
+      <search><![CDATA[/* [Inicio plugin ReceitaGrupo - parte2] */]]></search>
+      <add position="after">
+        <![CDATA[
+  qry += "&congrupo="+$F('filtroreceitagrupo');]]>
+      </add>
+    </operation>
+    <operation>
+      <search><![CDATA[<!-- [Inicio plugin ReceitaGrupo - parte3] -->]]></search>
+      <add position="after">
+        <![CDATA[
+      <tr>
+        <td align="right">
+          <strong>Grupo Receita:</strong>
+        </td>
+        <td>
+          <?
+            $oReceitaGrupo = db_utils::getDao("receitagrupo");
+            $rsReceitaGrupo = $oReceitaGrupo->getReceitaGrupo(null);
+            $iNumRowsReceitaGrupo = $oReceitaGrupo->numrows;
+            $aReceitaGrupo = array();
+            $aReceitaGrupo[0] = "Sem grupo";
+
+            for($iInd=0;$iInd<$iNumRowsReceitaGrupo;$iInd++){
+              $oDadosReceitaGrupo = db_fieldsmemory($rsReceitaGrupo,$iInd);
+              $aReceitaGrupo[$oDadosReceitaGrupo->sequencial] = $oDadosReceitaGrupo->descricao;
+            }
+            
+            db_select("filtroreceitagrupo", $aReceitaGrupo, true, 1, "");
+          ?>
+        </td>
+      </tr>        
+]]>
+      </add>
+    </operation>
+  </file>
+  
+  <file path='cai2_correceitas002.php'>
+    <operation>
+      <search><![CDATA[/* [Inicio plugin ReceitaGrupo - parte1] */]]></search>
+      <add position="after">
+        <![CDATA[
+if ($congrupo != null && $congrupo != '' && $congrupo != 0) {
+    $where = ' o.k02_estorc in (select k02_estorc 
+                                  from taborc 
+                                       inner join plugins.receitagrupoitem on plugins.receitagrupoitem.receita = k02_codigo
+                                       inner join plugins.receitagrupo on plugins.receitagrupo.sequencial = plugins.receitagrupoitem.receitagrupo
+                                 where plugins.receitagrupo.sequencial = '.$congrupo.') and ';
+} else ]]>
+      </add>
+    </operation>
+  </file>  
+</modification>
