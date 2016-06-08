@@ -1,5 +1,5 @@
 <?xml version="1.0" standalone="yes" ?>
-<table name="plugins.receitagrupo" description="Guarda os grupos de receita." prefix="" label="Grupo de Receita" type="0">
+<table name="plugins.placaixausu" description="" prefix="" label="Tabela que guarda usuário que lançou planilha." type="0">
   <fields>
     <field name="sequencial"
            conteudo="int4"
@@ -16,42 +16,42 @@
            reference=""
            ispk="t"
            hassequence="t">
-      <sequence name="plugins.receitagrupoitem_sequencial_seq"></sequence>
+      <sequence name="plugins.placaixausu_sequencial_seq" ></sequence>
     </field>
-    <field name="receitagrupo"
+    <field name="numcgm"
            conteudo="int4"
-           description="Cadastro Receita Grupo"
+           description="CGM do usuário"
            inivalue="0"
-           label="Receita Gruoi"
-           size="10"
+           label="CGM do usuário"
+           size="4"
            null="f"
            uppercase="f"
            autocompl="f"
            aceitatipo="1"
            tipoobj="text"
-           labelrel="Receita Grupo"
+           labelrel="CGM do usuário"
            reference=""
            ispk="f"
            hassequence="f">
     </field>
-        <field name="receita"
+    <field name="codpla"
            conteudo="int4"
-           description="Receita"
+           description="Código da planilha"
            inivalue="0"
-           label="Receita"
-           size="10"
+           label="Código da planilha"
+           size="4"
            null="f"
            uppercase="f"
            autocompl="f"
            aceitatipo="1"
            tipoobj="text"
-           labelrel="Receita"
+           labelrel="Código da planilha"
            reference=""
            ispk="f"
            hassequence="f">
     </field>
   </fields>
   <primarykey>
-    <fieldpk name="sequencial"></fieldpk>
+    <fieldpk  name="sequencial"></fieldpk>
   </primarykey>
 </table>
