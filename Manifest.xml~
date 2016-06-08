@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <plugin name="ReceitaGrupo" label="Receita Grupo" plugin-version="1.0" ecidade-version="2.3.39" id-modulo="398">
+  <plugin name="ReceitaGrupo" label="Receita Grupo" plugin-version="1.1" ecidade-version="2.3.47" id-modulo="398">
    <id id="ReceitaGrupo"> </id>
    <files>
-     <!-- classe -->
-    <file name="db_receitagrupo_classe.php"    path="/classes/db_receitagrupo_classe.php" />
+    <!-- classe -->
+    <file name="db_receitagrupo_classe.php" path="/classes/db_receitagrupo_classe.php" />
+    <file name="db_placaixausu_classe.php"  path="/classes/db_placaixausu_classe.php" />
+
+    <!-- dd -->
+    <file name="plugins.receitagrupo.dd.xml"     path="/dd/tabelas/plugins.receitagrupo.dd.xml" />
+    <file name="plugins.receitagrupoitem.dd.xml" path="/dd/tabelas/plugins.receitagrupoitem.dd.xml" />
+    <file name="plugins.placaixausu.dd.xml"      path="/dd/tabelas/plugins.placaixausu.dd.xml" />
 
     <!-- outro -->
     <file name="ReceitaGrupo.xml"    path="/modification/xml/ReceitaGrupo.xml" />
-    <file name="plugins.receitagrupo.dd.xml"    path="/dd/tabelas/plugins.receitagrupo.dd.xml" />
-    <file name="plugins.receitagrupoitem.dd.xml"    path="/dd/tabelas/plugins.receitagrupoitem.dd.xml" />
+
    </files>
    <estrutura install="/instalacao.sql" uninstall="/desinstalacao.sql" >
    </estrutura>
