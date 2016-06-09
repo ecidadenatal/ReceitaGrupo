@@ -5,7 +5,7 @@
   <ecidade-version>2.3.39</ecidade-version>
   <file path='cai2_correceitas001.php'>
     <operation>
-      <search regex="true"><![CDATA[(<script.*src="scripts\/scripts.js"></script>)]]></search>
+      <search regex="true"><![CDATA[(<script.*src="scripts\/scripts.js"><\/script>)]]></search>
       <add>
         <![CDATA[
         $1
@@ -13,7 +13,7 @@
       </add>
     </operation>
     <operation>
-      <search regex="true"><![CDATA[(qry\s*+=\s*"&recurso="\s*+\s*recurso.*;)]]></search>
+      <search regex="true"><![CDATA[(qry\s*\+=\s*"&recurso="\s*\+\s*recurso.*;)]]></search>
       <add>
         <![CDATA[$1
   qry += "&congrupo="+$F('filtroreceitagrupo');]]>
