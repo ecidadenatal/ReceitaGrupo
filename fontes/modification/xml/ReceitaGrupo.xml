@@ -121,7 +121,8 @@ if (isset($ordena) and $ordena == 'D') {
       <add>
         <![CDATA[$1
                      left join plugins.placaixausu on codpla = k81_codpla
-                     left join rhpessoal on rh01_numcgm = placaixausu.numcgm
+                     left join rhpessoal on rh01_numcgm = placaixausu.numcgm 
+                                        and not exists (select 1 from rhpessoalmov inner join rhpesrescisao on rh05_seqpes = rh02_seqpes where rh02_regist = rh01_regist)
                      left join cgm       on z01_numcgm  = placaixausu.numcgm]]>
       </add>
     </operation>
