@@ -111,19 +111,14 @@ if (isset($ordena) and $ordena == 'D') {
       <search regex="true"><![CDATA[k12_estorn\n*.*from\s*placaixarec]]></search>
       <add>
         <![CDATA[k12_estorn,
-                     (coalesce(rh01_ponto, '0') || ' - ' || coalesce(z01_nome, '')) as usuario
+                             case when substr(o.k02_estorc, 1, 1) = '9' then 't' else 'f' end as deducao,
+   		             (select coalesce(rh01_ponto, '0') || ' - ' || coalesce(z01_nome, '')
+   		                from plugins.placaixausu 
+                             left join rhpessoal on rh01_numcgm = placaixausu.numcgm
+                             left join cgm       on z01_numcgm  = placaixausu.numcgm
+   	                   where codpla = k81_codpla
+   		               order by sequencial desc limit 1) as usuario
                 from placaixarec]]>
-      </add>
-    </operation>
-
-    <operation>
-      <search regex="true"><![CDATA[(and\s*o.k02_anousu.*")]]></search>
-      <add>
-        <![CDATA[$1
-                     left join plugins.placaixausu on codpla = k81_codpla
-                     left join rhpessoal on rh01_numcgm = placaixausu.numcgm 
-                                        and not exists (select 1 from rhpessoalmov inner join rhpesrescisao on rh05_seqpes = rh02_seqpes where rh02_regist = rh01_regist)
-                     left join cgm       on z01_numcgm  = placaixausu.numcgm]]>
       </add>
     </operation>
 
