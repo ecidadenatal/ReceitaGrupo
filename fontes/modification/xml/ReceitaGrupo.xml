@@ -111,7 +111,7 @@ if (isset($ordena) and $ordena == 'D') {
       <search regex="true"><![CDATA[k12_estorn\n*.*from\s*placaixarec]]></search>
       <add>
         <![CDATA[k12_estorn,
-                             case when substr(o.k02_estorc, 1, 1) = '9' then 't' else 'f' end as deducao,
+                     case when substr(o.k02_estorc, 1, 1) = '9' then 't' else 'f' end as deducao,
    		             (select coalesce(rh01_ponto, '0') || ' - ' || coalesce(z01_nome, '')
    		                from plugins.placaixausu 
                              left join rhpessoal on rh01_numcgm = placaixausu.numcgm
@@ -122,6 +122,20 @@ if (isset($ordena) and $ordena == 'D') {
       </add>
     </operation>
 
+    <operation>
+      <search regex="true"><![CDATA[(if \(\$oPla->k12_estorn == \'t\')]]></search>
+      <add>
+        <![CDATA[$1 && $oPla->deducao == "f"]]>
+      </add>
+    </operation>
+    
+    <operation>
+      <search regex="true"><![CDATA[(\$fValorPla = \$oRec->k12_estorn == \"t\")]]></search>
+      <add>
+        <![CDATA[$1 && $oRec->deducao == "f"]]>
+      </add>
+    </operation>
+        
     <operation>
       <search regex="true"><![CDATA[(\$pdf.*db_formatar.*\$oPla->k12_data.*;)]]></search>
       <add>
