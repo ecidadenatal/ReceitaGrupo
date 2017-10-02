@@ -112,7 +112,10 @@ if (isset($ordena) and $ordena == 'D') {
       <add>
         <![CDATA[k12_estorn,
                      case when substr(o.k02_estorc, 1, 1) = '9' then 't' else 'f' end as deducao,
-   		             (select coalesce(rh01_ponto, '0') || ' - ' || coalesce(z01_nome, '')
+                   (select case when rh01_regist is not null
+                                   then rh01_regist || ' - ' || coalesce(z01_nome, '')
+                                else ''
+                            end
    		                from plugins.placaixausu 
                              left join rhpessoal on rh01_numcgm = placaixausu.numcgm
                              left join cgm       on z01_numcgm  = placaixausu.numcgm
