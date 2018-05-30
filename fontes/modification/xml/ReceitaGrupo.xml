@@ -101,7 +101,7 @@ if (isset($ordena) and $ordena == 'D') {
     </operation>
 
     <operation>
-      <search regex="true"><![CDATA[order\s*by\s*k80_codpla]]></search>
+      <search regex="true"><![CDATA[order\s*by.*k80.*]]></search>
       <add>
         <![CDATA[$order]]>
       </add>
@@ -116,11 +116,11 @@ if (isset($ordena) and $ordena == 'D') {
                                    then rh01_regist || ' - ' || coalesce(z01_nome, '')
                                 else ''
                             end
-   		                from plugins.placaixausu 
+                   from plugins.placaixausu 
                              left join rhpessoal on rh01_numcgm = placaixausu.numcgm
                              left join cgm       on z01_numcgm  = placaixausu.numcgm
-   	                   where codpla = k81_codpla
-   		               order by sequencial desc limit 1) as usuario
+                      where codpla = k81_codpla
+                  order by sequencial desc limit 1) as usuario
                 from placaixarec]]>
       </add>
     </operation>
@@ -131,13 +131,13 @@ if (isset($ordena) and $ordena == 'D') {
         <![CDATA[$1 && $oPla->deducao == "f"]]>
       </add>
     </operation>
-    
+    <!-- 
     <operation>
       <search regex="true"><![CDATA[(\$fValorPla = \$oRec->k12_estorn == \"t\")]]></search>
       <add>
         <![CDATA[$1 && $oRec->deducao == "f"]]>
       </add>
-    </operation>
+    </operation>  -->
         
     <operation>
       <search regex="true"><![CDATA[(\$pdf.*db_formatar.*\$oPla->k12_data.*;)]]></search>
